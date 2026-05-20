@@ -6,11 +6,17 @@
 
     @forelse($groups as $group)
         <section class="mb-8">
-            <div class="mb-3 flex items-baseline justify-between">
+            <div class="mb-3 flex items-baseline justify-between gap-3">
                 <h2 class="text-xl font-semibold text-slate-900">{{ $group->name }}</h2>
-                @if($group->city)
-                    <span class="text-sm text-slate-500">{{ $group->city }}</span>
-                @endif
+                <div class="flex items-baseline gap-3">
+                    @if($group->city)
+                        <span class="text-sm text-slate-500">{{ $group->city }}</span>
+                    @endif
+                    <a href="{{ route('groups.members.index', $group) }}"
+                       class="text-sm font-medium text-indigo-600 hover:text-indigo-700">
+                        Leden &amp; beheerders →
+                    </a>
+                </div>
             </div>
 
             @if($group->cars->isEmpty())

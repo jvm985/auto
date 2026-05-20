@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\CarCalendarController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GroupMemberController;
 use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -38,4 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/auto/{car}/reserveringen', [ReservationController::class, 'store'])->name('reservations.store');
     Route::patch('/reserveringen/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
     Route::delete('/reserveringen/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+
+    Route::get('/groepen/{group}/leden', [GroupMemberController::class, 'index'])->name('groups.members.index');
+    Route::post('/groepen/{group}/leden', [GroupMemberController::class, 'store'])->name('groups.members.store');
+    Route::patch('/groepen/{group}/leden/{user}', [GroupMemberController::class, 'update'])->name('groups.members.update');
+    Route::delete('/groepen/{group}/leden/{user}', [GroupMemberController::class, 'destroy'])->name('groups.members.destroy');
 });

@@ -28,7 +28,16 @@ class User extends Authenticatable
 
     public function carSharingGroups(): BelongsToMany
     {
-        return $this->belongsToMany(CarSharingGroup::class)->withTimestamps();
+        return $this->belongsToMany(CarSharingGroup::class)
+            ->withPivot('is_admin')
+            ->withTimestamps();
+    }
+
+    public function isAdminOf(CarSharingGroup $group): bool
+    {
+        $pivot = $this->carSharingGroups()->find($group->id)?->pivot;
+
+        return (bool) ($pivot?->is_admin ?? false);
     }
 
     public function reservations(): HasMany

@@ -15,7 +15,14 @@ class CarSharingGroup extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsToMany(User::class)
+            ->withPivot('is_admin')
+            ->withTimestamps();
+    }
+
+    public function admins(): BelongsToMany
+    {
+        return $this->users()->wherePivot('is_admin', true);
     }
 
     public function cars(): HasMany
