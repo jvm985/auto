@@ -41,7 +41,7 @@ class GroupMemberController extends Controller
 
         $user = User::firstOrCreate(
             ['email' => $email],
-            ['name' => $data['name'] ?: explode('@', $email)[0]],
+            ['name' => ($data['name'] ?? null) ?: explode('@', $email)[0]],
         );
 
         if ($group->users()->whereKey($user->id)->exists()) {
