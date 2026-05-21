@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN docker-php-ext-install pdo pdo_sqlite mbstring xml intl zip sockets
 
 COPY docker/uploads.ini /usr/local/etc/php/conf.d/zz-uploads.ini
+COPY docker/fpm-nonroot.conf /usr/local/etc/php-fpm.d/zz-nonroot.conf
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
