@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 #
 # One-time provisioning for auto.irishof.cloud.
-# Run on the production server as root (or with sudo) after cloning to /opt/irishof/4-auto.
+# Run on the production server as root (or with sudo) after cloning to /opt/irishof/12-auto.
 #
 # Prerequisites on the host:
 #   - Docker + docker compose
 #   - nginx, certbot, python3-certbot-nginx
 #
 # Usage:
-#   sudo /opt/irishof/4-auto/deploy/server-setup.sh
+#   sudo /opt/irishof/12-auto/deploy/server-setup.sh
 #
 set -euo pipefail
 
-APP_DIR="/opt/irishof/4-auto"
+APP_DIR="/opt/irishof/12-auto"
 DOMAIN="auto.irishof.cloud"
 EMAIL="admin@irishof.cloud"
 

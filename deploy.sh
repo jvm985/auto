@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Deploy script for auto.irishof.cloud
-# Runs on the production server in /opt/irishof/4-auto
+# Runs on the production server in /opt/irishof/12-auto
 #
 # Usage: sudo ./deploy.sh
 #
@@ -15,7 +15,7 @@
 #
 set -euo pipefail
 
-APP_DIR="/opt/irishof/4-auto"
+APP_DIR="/opt/irishof/12-auto"
 SERVICE="app"
 
 cd "$APP_DIR"
