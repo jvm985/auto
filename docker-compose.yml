@@ -4,6 +4,8 @@ services:
   app:
     build: .
     restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1.0
     volumes:
       - public:/var/www/html/public
       - storage:/var/www/html/storage
@@ -12,6 +14,8 @@ services:
   nginx:
     image: nginx:alpine
     restart: unless-stopped
+    mem_limit: 64m
+    cpus: 0.5
     ports:
       - "127.0.0.1:8082:80"
     volumes:
