@@ -20,7 +20,7 @@ FROM php:8.4-fpm
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        curl ca-certificates unzip git \
+        curl ca-certificates unzip git gosu \
         libsqlite3-dev sqlite3 libxml2-dev libonig-dev libicu-dev libzip-dev \
     && rm -rf /var/lib/apt/lists/*
 
