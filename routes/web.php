@@ -3,8 +3,12 @@
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\CarCalendarController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\GroupCostsController;
 use App\Http\Controllers\GroupMemberController;
+use App\Http\Controllers\MileageEntryController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\SettlementController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -44,4 +48,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/groepen/{group}/leden', [GroupMemberController::class, 'store'])->name('groups.members.store');
     Route::patch('/groepen/{group}/leden/{user}', [GroupMemberController::class, 'update'])->name('groups.members.update');
     Route::delete('/groepen/{group}/leden/{user}', [GroupMemberController::class, 'destroy'])->name('groups.members.destroy');
+
+    Route::get('/groepen/{group}/kosten', [GroupCostsController::class, 'index'])->name('groups.costs.index');
+    Route::post('/groepen/{group}/kosten', [ExpenseController::class, 'store'])->name('expenses.store');
+    Route::delete('/groepen/{group}/kosten/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
+    Route::post('/groepen/{group}/km', [MileageEntryController::class, 'store'])->name('mileage.store');
+    Route::delete('/groepen/{group}/km/{mileage}', [MileageEntryController::class, 'destroy'])->name('mileage.destroy');
+    Route::post('/groepen/{group}/afrekeningen', [SettlementController::class, 'store'])->name('settlements.store');
+    Route::get('/groepen/{group}/afrekeningen/{settlement}', [SettlementController::class, 'show'])->name('settlements.show');
 });

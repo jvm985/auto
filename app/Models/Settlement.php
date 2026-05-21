@@ -8,19 +8,38 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['car_sharing_group_id', 'name', 'brand', 'model', 'license_plate', 'color'])]
-class Car extends Model
+#[Fillable([
+    'car_sharing_group_id',
+    'period_start',
+    'period_end',
+    'total_cost',
+    'total_km',
+    'participant_count',
+    'share_per_participant',
+    'closed_by_user_id',
+])]
+class Settlement extends Model
 {
     use HasFactory;
+
+    protected function casts(): array
+    {
+        return [
+            'period_start' => 'date',
+            'period_end' => 'date',
+            'total_cost' => 'decimal:2',
+            'share_per_participant' => 'decimal:2',
+        ];
+    }
 
     public function group(): BelongsTo
     {
         return $this->belongsTo(CarSharingGroup::class, 'car_sharing_group_id');
     }
 
-    public function reservations(): HasMany
+    public function lines(): HasMany
     {
-        return $this->hasMany(Reservation::class);
+        return $this->hasMany(SettlementLine::class);
     }
 
     public function expenses(): HasMany
@@ -33,10 +52,8 @@ class Car extends Model
         return $this->hasMany(MileageEntry::class);
     }
 
-    public function displayName(): string
+    public function closedBy(): BelongsTo
     {
-        $parts = array_filter([$this->brand, $this->model]);
-
-        return $parts ? $this->name.' ('.implode(' ', $parts).')' : $this->name;
+        return $this->belongsTo(User::class, 'closed_by_user_id');
     }
 }
