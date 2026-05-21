@@ -17,6 +17,11 @@ set -euo pipefail
 
 APP_DIR="/opt/irishof/12-auto"
 SERVICE="app"
+MONITOR_LOCK=/var/lock/monitor_apps.suppress
+
+# Suppress monitor auto-restart while we deploy.
+touch "$MONITOR_LOCK"
+trap 'rm -f "$MONITOR_LOCK"' EXIT INT TERM
 
 cd "$APP_DIR"
 
